@@ -1,0 +1,203 @@
+% Please make sure you insert your
+% data according to the instructions in PoSauthmanual.pdf
+\documentclass{PoS}
+\usepackage{amsmath}
+
+\title{Baryon bag simulation of QCD in the strong coupling limit}
+
+\ShortTitle{Baryon bag simulation of QCD in the strong coupling limit}
+
+
+\author{\speaker{Oliver Orasch}\\
+        University of Graz, Institute of Physics, 8010 Graz, Austria\\
+        E-mail: \email{oliver.orasch@uni-graz.at}}
+        
+\author{Christof Gattringer\\
+        University of Graz, Institute of Physics, 8010 Graz, Austria\\
+        E-mail: \email{christof.gattringer@uni-graz.at}}
+        
+\author{Shailesh Chandrasekharan\\
+        Duke University, Physics Departement, 27704 Durham, NC\\
+        E-mail: \email{sch@phy.duke.edu}}
+        
+\author{Pascal Toerek\\
+        University of Graz, Institute of Physics, 8010 Graz, Austria\\
+        E-mail: \email{pascal.toerek@uni-graz.at}}
+        
+    
+\abstract{We explore the possibility of a simulation of strong coupling QCD in terms of baryon bags. Since the gauge action is missing in the strong coupling partition sum, the integration over the gauge group is possible and the remaining Grassmann integral can be mapped to a statistical system of monomers, dimers and loops. Rather recently it was shown that the contributions from the baryons, i.e., the tri-quark monomers, dimers and loops, can be collected in so-called baryon bags. Within the bags the baryons propagate freely whereas the rest of the lattice is solely filled with interacting meson terms, i.e., quark and di-quark monomers and dimers. We perform a simulation directly in the baryon bag language and show first results in two dimensions.}
+
+
+\FullConference{The 37th Annual International Symposium on Lattice Field Theory - LATTICE2019\\
+		16-22 June, 2019\\
+		Hilton Hotel, Wuhan, Hubei, China.}
+
+
+\begin{document}
+
+\section{Introduction}
+
+We present a method to restrict the sign problem to subsets of the lattice. Within this so-called fermion bags the sign problem is solved exactly as long as the chemical potential is small.
+
+\section{Baryon bags and the fermion sign problem}
+
+%In this work we revisit the idea to simulate strong coupling QCD in terms of a system of fermion worldlines.
+
+As a starting point we would like to familiarize the reader with the model. Strong coupling QCD ($\beta = 0$) is given by the partition function
+\begin{equation}
+Z = \int \mathcal{D}\big[\overline{\psi}\psi\big] \int \mathcal{D}\big[U\big] \;\text{e}^{S_F\left[\bar{\psi},\psi,U\right]}
+\label{eq:part_sum}
+\end{equation} 
+where the Grassmann and SU(3) Haar measures are given by the following product measures
+\begin{equation*}
+\int \mathcal{D}\big[\overline{\psi}\psi\big]  = \prod_{x} \int \prod_{a = 1}^{3}\text{d}\overline{\psi}_{x,a}\text{d}\psi_{x,a} \;\;\;\text{ and } \;\;\;\int \mathcal{D}[U] = \prod_{x,\nu} \int_{\text{\tiny SU(3)}} \text{d}U_{x,\nu}.
+\end{equation*}
+Furthermore, we use one flavor of staggered quarks realized by the action
+\begin{equation}
+S_F\left[\bar{\psi},\psi,U\right] = \sum_x\Big(2m\bar{\psi}_x \psi_x + \sum_{\nu} \xi_{x,\nu}\Big[ \text{e}^{\mu\delta_{\nu, d}}\bar{\psi}_{x} U_{x,\nu} \psi_{x+\hat{\nu}} - \text{e}^{-\mu\delta_{\nu, d}}\bar{\psi}_{x+\hat{\nu}}U^{\dagger}_{x, \nu} \psi_{x} \Big] \Big).
+\label{eq:stag_act}
+\end{equation}
+The quark fields $\psi_x$ $(\overline{\psi}_x)$ are three-component Grassmann vectors, each component representing a color. They live on the sites of a $d$ dimensional lattice of volume $V = N_s^{d-1}N_t$. The SU(3) valued gauge fields $U_{x,\nu}$ live on the links of the aforementioned lattice. For the fermions, we choose periodic boundary conditions in spatial ($\nu = 1,\dots, d-1$) and anti-period boundary conditions in temporal ($\nu = d$) direction. We take the boundary conditions of the gauge links to be periodic in all directions. Since we are interested in driving the temperature we include an anisotropic coupling for the temporal direction. Together with the staggerd sign functions, we incorporate the anistropic coupling $t$ in the link factor $\xi_{x,\nu} = t^{\delta_{\nu,d}}\gamma_{x,\nu}$, where the staggered signs $\gamma_{x,\nu}$ are defined as usual,
+\begin{equation}
+\gamma_{x, 1} = 1, \hspace*{0.5cm}\gamma_{x, 2} = (-1)^{x_1},\;\; \dots, \hspace*{0.5cm}\gamma_{x, d} = (-1)^{x_1 + \dots + x_{d-1}}.
+\end{equation}
+Conventionally, the staggered action is defined with a factor of $1/2$ in front of the kinetc term. For conveniece, however, we rescaled the fermion fields by a factor of $\sqrt{2}$ yielding (\ref{eq:stag_act}). In principle, it is also possible to include a quark chemical potential $\mu$. In a conventional representation, however, this leads to a finite density sign problem.\\
+\\
+Let us briefly introduce the baryon bag representation. Due to the limited page count, we refrain from giving a full derviation of the baryon bag partion sum. We redirect the interested reader to \cite{Gattringer:2018mrg} where the mapping procedure was discussed rigorously. Here, we would rather give an intuitive illustration on the basis of the worldline representation of strong coupling QCD proposed by Karsch and M\"utter \cite{Karsch:1988zx}
+\begin{equation}
+Z = \sum_{\{n, d, \ell\}} w_n(m) \; w_d(t) \; w_{\ell}(\mu,t).
+\end{equation}
+The worldline degrees of freedom in this representation are monomers $n_x$ ($\hat{=}$ mass terms), dimers $d_{x,\nu}$ ($\hat{=}$ a forward hop followed by an backward hop on the same link) and baryon loops $\ell_{x,\nu}$ ($\hat{=}$ consecutive non-(self)intersecting forward/backward hops on a closed contour). Baryon loops are fermion loops of three quarks propagating coherently and, hence, $\ell_{x,\nu}$ is either $0$ or $1$. The occupations for the monomer are $n_x = 0,1,2,3$ and the dimers $d_{x,\nu} = 0,1,2,3$. Furthermore, an admissible configuration must satisfy the Grassmann constraint
+\begin{equation}
+n_x + \sum_{\nu} d_{x,\nu} + \sum_{\nu} \frac{3}{2} |\ell_{x,\nu}| = 3.
+\label{eq:GM_const}
+\end{equation}
+In principle, monomers and dimers carry color. This information, however, can be absorbed in combinatorical factors \cite{Rossi:1984cv, Karsch:1988zx, Marchis:2018tcs}.\\
+\\
+As it stands, partition sum (\ref{eq:part_sum}) is not suitable for a Monte Carlo simulation. Due to the fermion sign problem the weights of the baryon loops, $w_{\ell}(\mu,t)$, are not strictly posititive, not even for $\mu = 0$. Therefore, we need to group sets of configurations in such a way that the collective weights are appropriate for simulation. In the following we will use a fermion bag strategy (cite) to obtain real and positive weights for this system. The first observation is that baryonic degrees of freedom, i.e., 3-monomers ($n_x = 3$), 3-dimers ($d_{x,\nu}=3$) and baryon loops, fully saturate the Grassmann constraint (\ref{eq:GM_const}). According to this observation it is possible to identify baryon clusters on the lattice, much like in a percolation anaylis. Given such a cluster it is easy to imagine that it is in principle possible to find other configurations where the same volume occupied by the cluster is occupied by some other baryonic degrees of freedom. See figure? In other words, this is a system solely containing one kind of monomers and dimers and fermion loops. This has strong resemblence with a worldline system obtained from free fermions. With a careful analysis of the strong coupling partition sum, it is possible to show that the physics within such a cluster is indeed described by a free staggered action 
+\begin{equation}
+S_B\left[\overline{B},B\right] = \sum_x\Big(2M\overline{B}_x B_x +\sum_{\nu} \gamma_{x,\nu}t^{3\delta_{\nu,d}}\Big[ \text{e}^{3\mu\delta_{\nu,d}}\overline{B}_{x} B_{x+\hat{\nu}} - \text{e}^{-3\mu\delta_{\nu,d}}\overline{B}_{x+\hat{\nu}}B_{x} \Big] \Big)
+\label{eq:baryon_act}
+\end{equation}
+where $M = 4m^3$ is the bare baryon mass for the composite baryon field $B_x = \psi^{1}_x\psi^{2}_x\psi^{3}_x$ ($\overline{B}_x = \overline{\psi}^{3}_x\overline{\psi}^{2}_x\overline{\psi}^{1}_x$). In the following we will referr to such a cluster as a baryon bag. Each bag $\mathcal{B}_i$ which can occupy any arbitrary region on the lattice has a weight of
+\begin{equation}
+\text{det} D[\mathcal{B}_i]  = \int\limits_{\mathcal{B}_i} \prod_{x\in\mathcal{B}_i} \text{d} B_x \text{d}\overline{B}_x \exp\Big(\sum\limits_{x,y \in \mathcal{B}_i} \overline{B}_x D^{(i)}_{xy} B_y\Big)
+\end{equation}
+where $D^{(i)}_{xy}$ is the free Dirac operator defined by the baryon action (\ref{eq:baryon_act}). The union of all bags $\mathcal{B} = \cup_i \mathcal{B}_i$ we call the bag region. The rest of the lattice is filled with mesonic contributions - this region we dentote as the complementary domain $\overline{\mathcal{B}}$. It is occupied by networks of  monomers and dimers with $n_x = 0,1,2$ and $d_{x,\nu} = 0,1,2$. Thus, the parition sum for strong coupling QCD in the baryon bag representation is given by
+\begin{equation}
+Z = \sum_{\{\mathcal{B}\}}\prod_{\mathcal{B}_i \in \mathcal{B}} \text{det}D[\mathcal{B}_i] \; \times \; Z_{\overline{\mathcal{B}}}
+\end{equation}
+where $Z_{\overline{\mathcal{B}}} = \sum_{\{n, d || \mathcal{B}\}} w_n(m) \; w_d(t)$ is the weight for the complementary domain. See figure ... for a typical configuration of this system.\\
+\\
+Finally, let us comment on the difference to the simulation strategy of Karsch and M\"utter \cite{Karsch:1988zx}. Since fermion loops carry a sign, a sign problem is introduced by switching from the conventional to the worldline representation. Therefore, Karsch and M\"utter proposed to sample U(3) configurations and then reweight each U(3) configuration to the corresponding SU(3) configuration. Since U(3) and SU(3) merely differ by the presence fermion loops they proposed to identify closed contours of alternating 1- and 2-dimers. These contours are then viewed as a superposition of dimer chain and fermion loop and thus solve the sign problem. In a brief comment in \cite{Karsch:1988zx} it was also mentioned that a reweighting to chains of 3-dimers would in principle be possible. However, it was argued that the choice of the contour of the loop might not be unique for a given dimer occupation. This is exactly the role of the bag determinant: It is a quantum mechanical superposition of all possible ways to fill a given subset of the lattice with baryonic degrees of freedom: 3-monomers, 3-dimers and baryon loops. Thus, the bag representation fully takes into account the fermionic degrees of freedom of the model and simulataneously solves the fermion sign problem exactly - at least for small chemical potential. In a sense, the baryon bag representation resums large sets of configurations in the Karsch-M\"utter-representation.
+
+\subsection{Observables}
+
+The two main observables are the chiral condensate $\langle \overline{\psi}\psi \rangle = \partial \ln Z/\partial \beta / V$
+
+\subsection{Algorithm}
+
+In this work we use two kinds of algorithms: For a proof-of-concept study in 2D we use local algorithm that tries to exchange a dimer by a pair of monomers and vice versa. See \cite{Karsch:1988zx}. Albeit this algorithm breaks down in the chiral limit, it works well with the bag representation. For cross-checking and simulation on large lattices/higher dimensions we also developed a new worm algorithm. Basically, it is a natural extension of the well-known U(3)-worm \cite{Adams:2003cca} to arbitrary $m$. We postpone a detailed description to future publications \cite{Orasch:2019_1, Orasch:2019_2}. In the following, we will use two different updating strategies. \textit{Bag simulation} refers to the fact that we simulate the system in the bag representation with the local algorithm. \textit{Worm simulation} signals the use of the worm algorithm
+
+
+\section{2D Results}
+
+\section{4D Results}
+
+\section{Concluding remarks}
+
+\section{Acknowledgment}
+O. Orasch would like to thank Duke University for their hospitality where a large part of this work was conducted. Furthermore, O. Orasch thanks the Austrian Marshallplan Foundation for financial support.
+ 
+
+\begin{thebibliography}{99}
+
+%\cite{Rossi:1984cv}
+\bibitem{Rossi:1984cv} 
+  P.~Rossi and U.~Wolff,
+  %``Lattice {QCD} With Fermions at Strong Coupling: A Dimer System,''
+  Nucl.\ Phys.\ B {\bf 248}, 105 (1984).
+ % doi:10.1016/0550-3213(84)90589-3
+  %%CITATION = doi:10.1016/0550-3213(84)90589-3;%%
+  %114 citations counted in INSPIRE as of 11 Jul 2019
+  
+%\cite{Wolff:1984we}
+\bibitem{Wolff:1984we} 
+  U.~Wolff,
+  %``Baryons in Lattice {QCD} at Strong Coupling,''
+  Phys.\ Lett.\  {\bf 153B}, 92 (1985).
+  doi:10.1016/0370-2693(85)91448-0
+  %%CITATION = doi:10.1016/0370-2693(85)91448-0;%%
+  %26 citations counted in INSPIRE as of 11 Jul 2019
+
+%\cite{Karsch:1988zx}
+\bibitem{Karsch:1988zx} 
+  F.~Karsch and K.~H.~M\"utter,
+  %``Strong Coupling Qcd At Finite Baryon Number Density,''
+  Nucl.\ Phys.\ B {\bf 313}, 541 (1989).
+  %doi:10.1016/0550-3213(89)90396-9
+  %%CITATION = doi:10.1016/0550-3213(89)90396-9;%%
+  %129 citations counted in INSPIRE as of 11 Jul 2019
+
+%\cite{Boyd:1991fb}
+\bibitem{Boyd:1991fb} 
+  G.~Boyd, J.~Fingberg, F.~Karsch, L.~Karkkainen and B.~Petersson,
+  %``Critical exponents of the chiral transition in strong coupling QCD,''
+  Nucl.\ Phys.\ B {\bf 376}, 199 (1992).
+  %doi:10.1016/0550-3213(92)90074-L
+  %%CITATION = doi:10.1016/0550-3213(92)90074-L;%%
+  %41 citations counted in INSPIRE as of 11 Jul 2019
+  
+  %\cite{Gattringer:2018mrg}
+\bibitem{Gattringer:2018mrg} 
+  C.~Gattringer,
+  %``Baryon bags in strong coupling QCD,''
+  Phys.\ Rev.\ D {\bf 97}, no. 7, 074506 (2018)
+%  doi:10.1103/PhysRevD.97.074506
+ % [arXiv:1802.09417 [hep-lat]].
+  %%CITATION = doi:10.1103/PhysRevD.97.074506;%%
+  %2 citations counted in INSPIRE as of 18 Jul 2019
+  
+  %\cite{Marchis:2018tcs}
+\bibitem{Marchis:2018tcs} 
+  C.~Marchis, C.~Gattringer and O.~Orasch,
+  %``Bag representation for composite degrees of freedom in lattice gauge theories with fermions,''
+  PoS LATTICE {\bf 2018}, 243 (2018)
+%  doi:10.22323/1.334.0243
+%  [arXiv:1811.09372 [hep-lat]].
+  %%CITATION = doi:10.22323/1.334.0243;%%
+  
+  %\cite{Creutz:1978ub}
+\bibitem{Creutz:1978ub} 
+  M.~Creutz,
+  %``On Invariant Integration Over Su(n),''
+  J.\ Math.\ Phys.\  {\bf 19}, 2043 (1978).
+%  doi:10.1063/1.523581
+  %%CITATION = doi:10.1063/1.523581;%%
+  %82 citations counted in INSPIRE as of 18 Jul 2019
+  
+  %\cite{Adams:2003cca}
+\bibitem{Adams:2003cca} 
+  D.~H.~Adams and S.~Chandrasekharan,
+  %``Chiral limit of strongly coupled lattice gauge theories,''
+  Nucl.\ Phys.\ B {\bf 662}, 220 (2003)
+ % doi:10.1016/S0550-3213(03)00350-X
+  %[hep-lat/0303003].
+  %%CITATION = doi:10.1016/S0550-3213(03)00350-X;%%
+  %69 citations counted in INSPIRE as of 19 Jul 2019
+  
+%\cite{Orasch:2019_1}
+\bibitem{Orasch:2019_1} 
+ O.~Orasch and S.~Chandrasekharan,
+	work in preparation
+	
+%\cite{Orasch:2019_2}
+\bibitem{Orasch:2019_2} 
+ O.~Orasch, C.~Gattringer and S.~Chandrasekharan,
+ work in preparation
+
+
+
+\end{thebibliography}
+
+\end{document}
