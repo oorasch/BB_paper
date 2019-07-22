@@ -63,7 +63,7 @@ The quark fields $\psi_x$ $(\overline{\psi}_x)$ are three-component Grassmann ve
 \end{equation}
 Conventionally, the staggered action is defined with a factor of $1/2$ in front of the kinetc term. For conveniece, however, we rescaled the fermion fields by a factor of $\sqrt{2}$ yielding (\ref{eq:stag_act}). In principle, it is also possible to include a quark chemical potential $\mu$. In a conventional representation, however, this leads to a finite density sign problem.\\
 \\
-Let us briefly introduce the baryon bag representation. Due to the limited page count, we refrain from giving a full derviation of the baryon bag partion sum. We redirect the interested reader to \cite{Gattringer:2018mrg} where the mapping procedure was discussed rigorously. Here, we would rather give an intuitive illustration on the basis of the worldline representation of strong coupling QCD proposed by Karsch and M\"utter \cite{Karsch:1988zx}
+Let us briefly introduce the baryon bag representation. We refrain from giving a full derviation of the baryon bag partion sum and redirect the interested reader to \cite{Gattringer:2018mrg} where the mapping procedure was discussed rigorously. Here, we would rather give an intuitive illustration on the basis of the worldline representation of strong coupling QCD proposed by Karsch and M\"utter \cite{Karsch:1988zx}
 \begin{equation}
 Z = \sum_{\{n, d, \ell\}} w_n(m) \; w_d(t) \; w_{\ell}(\mu,t).
 \end{equation}
@@ -76,7 +76,7 @@ In principle, monomers and dimers carry color. This information, however, can be
 \\
 As it stands, partition sum (\ref{eq:part_sum}) is not suitable for a Monte Carlo simulation. Due to the fermion sign problem the weights of the baryon loops, $w_{\ell}(\mu,t)$, are not strictly posititive, not even for $\mu = 0$. Therefore, we need to group sets of configurations in such a way that the collective weights are appropriate for simulation. In the following we will use a fermion bag strategy (cite) to obtain real and positive weights for this system. The first observation is that baryonic degrees of freedom, i.e., 3-monomers ($n_x = 3$), 3-dimers ($d_{x,\nu}=3$) and baryon loops, fully saturate the Grassmann constraint (\ref{eq:GM_const}). According to this observation it is possible to identify baryon clusters on the lattice, much like in a percolation analysis. Given such a cluster it is easy to imagine that it is in principle possible to find other configurations where the same volume occupied by the cluster is occupied by some other baryonic degrees of freedom. See figure? In other words, this is a system solely containing one kind of monomers and dimers and fermion loops. This has strong resemblence with a worldline system obtained from free fermions. With a careful analysis of the strong coupling partition sum, it is possible to show that the physics within such a cluster is indeed described by a free staggered action 
 \begin{equation}
-S_B\left[\overline{B},B\right] = \sum_x\Big(2M\overline{B}_x B_x +\sum_{\nu} \gamma_{x,\nu}t^{3\delta_{\nu,d}}\Big[ \text{e}^{3\mu\delta_{\nu,d}}\overline{B}_{x} B_{x+\hat{\nu}} - \text{e}^{-3\mu\delta_{\nu,d}}\overline{B}_{x+\hat{\nu}}B_{x} \Big] \Big)
+S_B\left[\overline{B},B\right] = \sum_x\Big(2M\overline{B}_x B_x +\sum_{\nu} \xi_{x,\nu}^3\Big[ \text{e}^{3\mu\delta_{\nu,d}}\overline{B}_{x} B_{x+\hat{\nu}} - \text{e}^{-3\mu\delta_{\nu,d}}\overline{B}_{x+\hat{\nu}}B_{x} \Big] \Big)
 \label{eq:baryon_act}
 \end{equation}
 where $M = 4m^3$ is the bare baryon mass for the composite baryon field $B_x = \psi^{1}_x\psi^{2}_x\psi^{3}_x$ ($\overline{B}_x = \overline{\psi}^{3}_x\overline{\psi}^{2}_x\overline{\psi}^{1}_x$). In the following we will referr to such a cluster as a baryon bag. Each bag $\mathcal{B}_i$ which can occupy any arbitrary region on the lattice has a weight of
@@ -91,19 +91,19 @@ Z = \sum_{\{\mathcal{B}\}}\prod_{\mathcal{B}_i \in \mathcal{B}} \text{det}D[\mat
 \end{equation}
 where $Z_{\overline{\mathcal{B}}} = \sum_{\{n, d || \mathcal{B}\}} w_n(m) \; w_d(t)$ is the weight for the complementary domain. The set $\{n, d || \mathcal{B}\}$ denotes the set of $\overline{\mathcal{B}}$ configurations that are compatible with a given bag structure $\mathcal{B}$. See figure ... for a typical configuration of this system.\\
 \\
-Finally, let us comment on the difference to the simulation strategy of Karsch and M\"utter \cite{Karsch:1988zx}. Since fermion loops carry a sign, a sign problem is introduced by switching from the conventional to the worldline representation. Therefore, Karsch and M\"utter proposed to sample U(3) configurations and then reweight each U(3) configuration to the corresponding SU(3) configuration. Since U(3) and SU(3) merely differ by the presence fermion loops they proposed to identify closed contours of alternating 1- and 2-dimers. These contours are then viewed as a superposition of dimer chain and fermion loop and thus solve the sign problem. In a brief comment in \cite{Karsch:1988zx} it was also mentioned that a reweighting to chains of 3-dimers would in principle be possible. However, it was argued that the choice of the contour of the loop might not be unique for a given dimer occupation. This is exactly the role of the bag determinant: It is a quantum mechanical superposition of all possible ways to fill a given subset of the lattice with baryonic degrees of freedom: 3-monomers, 3-dimers and baryon loops. Thus, the bag representation fully takes into account the fermionic degrees of freedom of the model and simulataneously solves the fermion sign problem exactly - at least for small chemical potential.
+Finally, let us comment on the difference to the simulation strategy of Karsch and M\"utter \cite{Karsch:1988zx}. To circumvent the fermion sign problem, Karsch and M\"utter proposed to sample U(3) configurations and then reweight each U(3) configuration to the corresponding SU(3) configuration. Since U(3) and SU(3) merely differ by the presence fermion loops they proposed to identify closed contours of alternating 1- and 2-dimers. These contours are then viewed as a superposition of dimer chain and fermion loop and thus solve the sign problem. In a brief comment in \cite{Karsch:1988zx} it was also mentioned that a reweighting to chains of 3-dimers would in principle be possible. However, it was argued that the choice of the contour of the loop might not be unique for a given dimer occupation. This is exactly the role of the bag determinant: It is a quantum mechanical superposition of all possible ways to fill a given subset of the lattice with baryonic degrees of freedom: 3-monomers, 3-dimers and baryon loops. Thus, the bag representation fully takes into account the fermionic degrees of freedom of the model and simulataneously solves the fermion sign problem exactly - at least for small chemical potential.
 
 \subsection{Observables}
 
 The observables conventionally discussed in strong coupling QCD are the chiral condensate and the chiral susceptibility, i.e.,
 \begin{equation}
-\langle \overline{\psi}\psi \rangle = \partial \ln Z/\partial \beta / V \hspace{1cm} \text{and} \hspace{1cm} \chi_{\overline{\psi}\psi} = \partial \langle\overline{\psi}\psi\rangle/\partial \beta + V\langle \overline{\psi}\psi \rangle^2,
+\langle \overline{\psi}\psi \rangle = \partial \ln Z/\partial m / V \hspace{1cm} \text{and} \hspace{1cm} \chi_{\overline{\psi}\psi} = \partial \langle\overline{\psi}\psi\rangle/\partial m + V\langle \overline{\psi}\psi \rangle^2,
 \end{equation}
 where $ \chi_{\overline{\psi}\psi}$ is defined to include connected and disconnected terms. Furthermore, in the baryon bag picture an interesting observable is accessible: the average bag size $S_B$. Its expectation value is defined as
 \begin{equation}
 \langle S_B \rangle = (1/V) \sum_{\mathcal{B}_i \in \mathcal{B}} |\mathcal{B}_i|
 \end{equation}
-where $|\mathcal{B}_i|$ denotes the sites in the ith bag. It is a measure for the fraction of the lattice where the physics is described by the baryon action (\ref{eq:baryon_act}). Loosely speaking, it measures the distribution of degrees of freedom of the system. In the following, we will always compare a conventional observable - the condensate or the susceptibility - with the bag size to see if a change in the observabe is signaled in the change of worldline degrees of freedom.
+where $|\mathcal{B}_i|$ denotes the sites in the i-\textit{th} bag. It is a measure for the fraction of the lattice where the physics is described by the baryon action (\ref{eq:baryon_act}). Loosely speaking, it measures the distribution of degrees of freedom of the system. In the following, we will always compare a conventional observable - the condensate or the susceptibility - with the bag size to see if a change in the observabe is signaled in the change of worldline degrees of freedom.
 \subsection{Algorithm}
 
 In this work we use two kinds of algorithms: For a proof-of-concept study in 2D we use local algorithm that tries to exchange a dimer with a pair of monomers and vice versa. See \cite{Karsch:1988zx}. Albeit this algorithm breaks down in the chiral limit, it works well with the bag representation. In the following \textit{bag simulation} refers to this strategy.\\
@@ -112,6 +112,8 @@ At first we pick a site $x$ with a probaility of $1/V$. Due to the presence of m
 In the following, we call this strategy \textit{worm simulation}.
 
 \section{2D Results}
+
+\newpage
 
 \section{4D Results}
 
