@@ -57,7 +57,7 @@ Furthermore, we use one flavor of staggered quarks realized by the action
 S_F\left[\overline{\psi},\psi,U\right] = \sum_x\Big(2m\overline{\psi}_x \psi_x + \sum_{\nu} \xi_{x,\nu}\Big[ \text{e}^{\mu\delta_{\nu, d}}\overline{\psi}_{x} U_{x,\nu} \psi_{x+\hat{\nu}} - \text{e}^{-\mu\delta_{\nu, d}}\overline{\psi}_{x+\hat{\nu}}U^{\dagger}_{x, \nu} \psi_{x} \Big] \Big).
 \label{eq:stag_act}
 \end{equation}
-The quark fields $\psi_x$ $(\overline{\psi}_x)$ are three-component Grassmann vectors, each component representing a color. They live on the sites of a $d$ dimensional lattice of volume $V = N_s^{d-1}N_t$. The SU(3) valued gauge fields $U_{x,\nu}$ live on the links of the aforementioned lattice. For the fermions, we choose periodic boundary conditions in spatial ($\nu = 1,\dots, d-1$) and anti-period boundary conditions in temporal ($\nu = d$) direction. We take the boundary conditions of the gauge links to be periodic in all directions. Since we are interested in driving the temperature we include an anisotropic coupling for the temporal direction. Together with the staggerd sign functions, we incorporate the anistropic coupling $t$ in the link factor $\xi_{x,\nu} = t^{\delta_{\nu,d}}\gamma_{x,\nu}$, where the staggered signs $\gamma_{x,\nu}$ are defined as usual,
+The quark fields $\psi_x$ $(\overline{\psi}_x)$ are three-component Grassmann vectors, each component representing a color. They live on the sites of a $d$ dimensional lattice of volume $V = N_s^{d-1}N_t$. The SU(3) valued gauge fields $U_{x,\nu}$ live on the links of the aforementioned lattice. For the fermions, we choose periodic boundary conditions in spatial ($\nu = 1,\dots, d-1$) and anti-periodic boundary conditions in temporal ($\nu = d$) direction. We take the boundary conditions of the gauge links to be periodic in all directions. Since we are interested in driving the temperature we include an anisotropic coupling for the temporal direction. Together with the staggerd sign functions, we incorporate the anistropic coupling $t$ in the link factor $\xi_{x,\nu} = t^{\delta_{\nu,d}}\gamma_{x,\nu}$, where the staggered signs $\gamma_{x,\nu}$ are defined as usual,
 \begin{equation}
 \gamma_{x, 1} = 1, \hspace*{0.5cm}\gamma_{x, 2} = (-1)^{x_1},\;\; \dots, \hspace*{0.5cm}\gamma_{x, d} = (-1)^{x_1 + \dots + x_{d-1}}.
 \end{equation}
@@ -74,7 +74,7 @@ n_x + \sum_{\nu} d_{x,\nu} + \sum_{\nu} \frac{3}{2} |\ell_{x,\nu}| = 3.
 \end{equation}
 In principle, monomers and dimers carry color. This information, however, can be absorbed in combinatorical factors \cite{Rossi:1984cv, Karsch:1988zx, Marchis:2018tcs}.\\
 \\
-As it stands, partition sum (\ref{eq:part_sum}) is not suitable for a Monte Carlo simulation. Due to the fermion sign problem the weights of the baryon loops, $w_{\ell}(\mu,t)$, are not strictly posititive, not even for $\mu = 0$. Therefore, we need to group sets of configurations in such a way that the collective weights are appropriate for simulation. In the following we will use a fermion bag strategy \cite{Chandrasekharan:2009wc} to obtain real and positive weights for this system. The first observation is that baryonic degrees of freedom, i.e., 3-monomers ($n_x = 3$), 3-dimers ($d_{x,\nu}=3$) and baryon loops, fully saturate the Grassmann constraint (\ref{eq:GM_const}). According to this observation it is possible to identify baryon clusters on the lattice, much like in a percolation analysis. Given such a cluster it is easy to imagine that it is in principle possible to find other configurations where the same volume occupied by the cluster is occupied by some other baryonic degrees of freedom. See figure? In other words, this is a system solely containing one kind of monomers and dimers and fermion loops. This has strong resemblence with a worldline system obtained from free fermions. With a careful analysis of the strong coupling partition sum, it is possible to show that the physics within such a cluster is indeed described by a free staggered action 
+As it stands, partition sum (\ref{eq:part_sum}) is not suitable for a Monte Carlo simulation. Due to the fermion sign problem the weights of the baryon loops, $w_{\ell}(\mu,t)$, are not strictly posititive, not even for $\mu = 0$. Therefore, we need to group sets of configurations in such a way that the collective weights are appropriate for simulation. In the following we will use a fermion bag strategy \cite{Chandrasekharan:2009wc} to obtain real and positive weights in the partition sum. The first observation is that baryonic degrees of freedom, i.e., 3-monomers ($n_x = 3$), 3-dimers ($d_{x,\nu}=3$) and baryon loops, fully saturate the Grassmann constraint (\ref{eq:GM_const}). According to this observation each worldline configuration can be decomposed into baryon clusters and regions filled with mesonic degrees of freedom. Thus, for fixed background all configurations can be classified according to the baryon cluster structure. If we sum up all configurations belonging to the same class we obtain a non-local description where fermions are restricted to clusters of arbitrary shape. With a careful analysis of the strong coupling partition sum, it is possible to show that the physics within these clusters is described by a free staggered action 
 \begin{equation}
 S_B\left[\overline{B},B\right] = \sum_x\Big(2M\overline{B}_x B_x +\sum_{\nu} \xi_{x,\nu}^3\Big[ \text{e}^{3\mu\delta_{\nu,d}}\overline{B}_{x} B_{x+\hat{\nu}} - \text{e}^{-3\mu\delta_{\nu,d}}\overline{B}_{x+\hat{\nu}}B_{x} \Big] \Big)
 \label{eq:baryon_act}
@@ -117,7 +117,14 @@ where $f_{\ell}(t) = 2/(t^{n^{\ell}_t} + t^{-n^{\ell}_t})$ with $n^{\ell}_t = 3N
 
 \section{2D Results}
 
-To cross-check both updating strategies
+Firstly, we cross-check the results from the \textit{bag simulation} on small lattices. On a $2x2$ we can systematically count all possible configurations and, thus, provide exact results to confront our data. 
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{Plots/Checks/Comb/V2n4_SB_cond_m0to1_combined.pdf}
+\caption{Cross-checks for the condensate and the bag size. Blue circles denote the data from the \textit{bag simulation} in both panels. \textit{(Left)} $V = 2x2$; the dashed line is data from an exact counting of configurations. \textit{(Right)} $V = 4x4$; Red triangles denote data from the \textit{worm}, green diamonds data from a conventional simulation.}
+\label{fig:check}
+\end{figure}
+Since $2x2$ is extremely small, some configurations are not possible that automatically appear on larger lattices.  Therefore, we also cross-check on a $4x4$ lattice. In this case counting the configurations is not an option and we use the \textit{worm}. Additionally, we augment (at least for the condesate) the check by including data from a conventional simulation. See Figure (\ref{fig:check}). The left panel shows the data for the $2x2$ lattice; the right panel the $4x4$ case. The data matches nicely the reference data and we conclude that both the \textit{bag} and the \textit{worm simulation} have been implemented correctly.
 
 \newpage
 
@@ -185,8 +192,8 @@ O. Orasch would like to thank Duke University for their hospitality where a larg
   S.~Chandrasekharan,
   %``The Fermion bag approach to lattice field theories,''
   Phys.\ Rev.\ D {\bf 82}, 025007 (2010)
-  doi:10.1103/PhysRevD.82.025007
-  [arXiv:0910.5736 [hep-lat]].
+%  doi:10.1103/PhysRevD.82.025007
+%  [arXiv:0910.5736 [hep-lat]].
   %%CITATION = doi:10.1103/PhysRevD.82.025007;%%
   %61 citations counted in INSPIRE as of 23 Jul 2019
   
