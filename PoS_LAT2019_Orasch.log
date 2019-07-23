@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  23 JUL 2019 08:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  23 JUL 2019 10:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -405,13 +405,13 @@ LaTeX Font Warning: Command \tiny invalid in math mode on input line 114.
 
 [4] [5]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 139.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 141.
  [6] (./PoS_LAT2019_Orasch.aux) ) 
 Here is how much of TeX's memory you used:
- 3309 strings out of 492982
- 41481 string characters out of 6134895
- 107013 words of memory out of 5000000
- 6736 multiletter control sequences out of 15000+600000
+ 3311 strings out of 492982
+ 41510 string characters out of 6134895
+ 107017 words of memory out of 5000000
+ 6737 multiletter control sequences out of 15000+600000
  80022 words of font info for 130 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,16n,28p,1564b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -430,10 +430,10 @@ are/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
 tmri8a.pfb>
-Output written on PoS_LAT2019_Orasch.pdf (7 pages, 171054 bytes).
+Output written on PoS_LAT2019_Orasch.pdf (7 pages, 171677 bytes).
 PDF statistics:
- 155 PDF objects out of 1000 (max. 8388607)
- 126 compressed objects within 2 object streams
- 30 named destinations out of 1000 (max. 500000)
+ 158 PDF objects out of 1000 (max. 8388607)
+ 129 compressed objects within 2 object streams
+ 31 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
