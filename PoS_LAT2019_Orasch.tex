@@ -85,7 +85,7 @@ where $M = 4m^3$ is the bare baryon mass for the composite baryon field $B_x = \
 \label{eq:baryon_det}
 \end{equation}
 where $D^{(i)}_{xy}$ is the free Dirac operator defined by the baryon action (\ref{eq:baryon_act}). In (\ref{eq:baryon_det}) each loop is paired with a compatible 3-dimer chain and $\text{det} D[\mathcal{B}_i] \geq 0$. The latter condition only holds for small $\mu$.\\
-The union of all bags $\mathcal{B} = \cup_i \mathcal{B}_i$ we call the bag region. The rest of the lattice is filled with mesonic contributions - this region we dentote as the complementary domain $\overline{\mathcal{B}}$. It is occupied by networks of  monomers and dimers with $n_x = 0,1,2$ and $d_{x,\nu} = 0,1,2$. Thus, the parition sum for strong coupling QCD in the baryon bag representation is given by
+The union of all bags $\mathcal{B} = \cup_i \mathcal{B}_i$ we call the bag region. The rest of the lattice is filled with mesonic contributions - this region we denote as the complementary domain $\overline{\mathcal{B}}$. It is occupied by networks of  monomers and dimers with $n_x = 0,1,2$ and $d_{x,\nu} = 0,1,2$. Thus, the parition sum for strong coupling QCD in the baryon bag representation is given by
 \begin{equation}
 Z = \sum_{\{\mathcal{B}\}}\prod_{\mathcal{B}_i \in \mathcal{B}} \text{det}D[\mathcal{B}_i] \; \times \; Z_{\overline{\mathcal{B}}}
 \end{equation}
@@ -107,11 +107,17 @@ where $|\mathcal{B}_i|$ denotes the sites in the i-\textit{th} bag. It is a meas
 \subsection{Algorithm}
 
 In this work we use two kinds of algorithms: For a proof-of-concept study in 2D we use local algorithm that tries to exchange a dimer with a pair of monomers and vice versa. See \cite{Karsch:1988zx}. Albeit this algorithm breaks down in the chiral limit, it works well with the bag representation. In the following \textit{bag simulation} refers to this strategy.\\
-\\For cross-checking and simulation on large lattices/higher dimensions we also developed a new worm algorithm. Basically, it is a natural extension of the well-known U(3)-worm \cite{Adams:2003cca} to arbitrary $m$. We postpone a detailed description and proof of detailed balance to future publications \cite{Orasch:2019_1, Orasch:2019_2}. Here we simply state the update strategy. To keep the discussion somewhat general we explain the algorithm for U(N).\\
+\\For cross-checking and simulation on large lattices/higher dimensions we also developed a new worm algorithm. Basically, it is a natural extension of the well-known U(3)-worm \cite{Adams:2003cca} to arbitrary $m$. We postpone a detailed description and proof of detailed balance to future publications \cite{Orasch:2019_1, Orasch:2019_2}. Here we explain the algorithm for U(N).\\
 At first we pick a site $x$ with a probaility of $1/V$. Due to the presence of monomers, the worm may start in two ways: With a probabililty of $n_x/N$ the worm starts at the site by naming a monomer \textit{head}. With probability $d_{x,\nu}/N$ the worm decreases $d_{x,\nu}$ by $1$. To meet the Grassmann constraint, the algorithm increases $n_x$ by 1 and puts the \textit{head} onto the site $x+\hat{\nu}$. For convenience we introduce $t_{\nu} = t^{\delta_{\nu,\pm d}}$ and $w = 2(d-1) + 2t^2 + (2m)^2$. Once the worm has started it exits on the site with a probability $(2m)^2/w$ (by replacing \textit{head} with a monomer) or moves with probability $t^2_{\nu}/w$ in the direction $\nu$. By doing so the head temporarily moves to an intermediate site $x+\hat{\nu}$ by increasing $d_{x,\nu}$ by $1$. The worm has again two options: Exiting at this particular site with probability $n_{x+\hat{\nu}}/(N-d_{x,\nu})$ by decreasing $n_{x+\hat{\nu}}$ by $1$ or moving the \textit{head} to an adjacent site with probability $d_{x+\hat{\nu}, \mu}/(N-d_{x,\nu})$ by decreasing $d_{x+\hat{\nu}, \mu}$ by $1$. Thus, by moving the worm shuffles the monomer and dimer configuration and by combining the various starting/closing steps it is able to raise/lower the monomer number in steps of $2$. Note, that despite the fact that we defined a \textit{head} we did not mention a \textit{tail}. In this description any monomer is considered a \textit{tail} meaning the worm has the option to exit any time a monomer is encountered.\\
-In the following, we call this strategy \textit{worm simulation}.
+As described in \cite{Adams:2003cca}, the weights of the worm configurations are defined in such a way that the U(N) condensate is simply given by the length $L$ of the worm. To get the corresponding SU(N) observables we need to employ a Karsch-M\"utter-type reweighting strategy as described above. We use \cite{Boyd:1991fb}
+\begin{equation}
+\langle \mathcal{O} \rangle_{\tiny SU(3)} = \frac{\langle \mathcal{O} \prod_{\ell}(1 + f_{\ell}(t)\text{ sign}(\ell)) \rangle_{\tiny U(3)}}{\langle \prod_{\ell}(1 + f_{\ell}(t)\text{ sign}(\ell)) \rangle_{\tiny U(3)}}
+\end{equation}
+where $f_{\ell}(t) = 2/(t^{n^{\ell}_t} + t^{-n^{\ell}_t})$ with $n^{\ell}_t = 3N^{\ell}_t - 2N^{\ell}_{Dt}$. $N^{\ell}_t$ is the number of loop segements and $N^{\ell}_{Dt}$ is the number of dimers in time direction. In the following, we call this strategy \textit{worm simulation}.
 
 \section{2D Results}
+
+To cross-check both updating strategies
 
 \newpage
 
